@@ -3,6 +3,7 @@
   padding: 0;
   margin: 0;
   border: 0;
+  font: 'Poppins', sans-serif;
 }
 
 textarea:focus, input:focus{
@@ -10,14 +11,35 @@ textarea:focus, input:focus{
 }
 
 .App {
-  background-color: red;
   width: 100vw;
   height: 100vh;
 }
 
 .Messages {
-  background-color: blue;
   height: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 12px 12px 12px;
+  box-sizing: border-box;
+}
+
+.Message {
+  display: flex;
+  align-items: center;
+  padding: 12px 25px 12px 25px;
+  min-height: 50px;
+  border-radius: 25px;
+  box-sizing: border-box;
+  width: max-content;
+}
+
+.UserMessage {
+  background-color: orange;
+}
+
+.RespondentMessage {
+  background-color: lightblue;
+  align-self: flex-end;
 }
 
 .FieldContainer {

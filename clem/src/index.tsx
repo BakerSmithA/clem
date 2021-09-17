@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { MockChatbot } from './Chatbot';
+
+const chatbot = new MockChatbot();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App chatbot={chatbot} />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,30 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import { ChatMessage, Chatbot } from './Chatbot';
 
-function App() {
+interface AppProps {
+  chatbot: Chatbot
+}
+
+function App({chatbot}: AppProps) {
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   return (
     <div className='App'>
-      <Messages/>
+      <Messages 
+        messages={messages}
+      />
       <div className='FieldContainer'>
-        <Field/>
+        <Field
+          onSubmit={(t) => 
+            chatbot.respond(t, (hist) => setMessages(hist))
+          }
+        />
       </div>
       <div className='Spacer'/>
     </div>
   );
 }
 
-function Messages() {
+interface MessagesProps {
+  messages: ChatMessage[]
+}
+
+function Messages({messages}: MessagesProps) {
   return (
     <div className='Messages'>
+      {messages.map((m) => <Message key={m.text} text={m.text} fromUser={m.fromUser} />)}
     </div>
   );
 }
 
-function Field() {
+function Message({text, fromUser}: ChatMessage) {
+  return (
+    <div className={`Message ${fromUser ? 'UserMessage' : 'RespondentMessage'}`}>
+      {text}
+    </div>
+  );
+}
+
+interface FieldProps {
+  onSubmit: (text: string) => void
+}
+
+function Field({onSubmit}: FieldProps) {
+  const textInput = React.createRef<HTMLInputElement>();
   return (
     <div className='FieldForm'>
-      <input type="text" className='TextField'/>
-      <div className='SendButton'/>
+      <input type="text" ref={textInput} className='TextField'/>
+      <div 
+        className='SendButton' 
+        onClick={() => onSubmit(textInput.current!.value)}
+      />
     </div>
   );
 }
