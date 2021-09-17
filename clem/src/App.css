@@ -4,6 +4,7 @@
   margin: 0;
   border: 0;
   font: 'Poppins', sans-serif;
+  font-size: 14pt;
 }
 
 textarea:focus, input:focus{
@@ -21,6 +22,7 @@ textarea:focus, input:focus{
   flex-direction: column;
   padding: 24px 12px 12px 12px;
   box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 .Message {
@@ -33,13 +35,18 @@ textarea:focus, input:focus{
   width: max-content;
 }
 
+.LoadingMessage {
+  display: flex;
+  align-items: center;
+}
+
 .UserMessage {
   background-color: orange;
+  align-self: flex-end;
 }
 
 .RespondentMessage {
   background-color: lightblue;
-  align-self: flex-end;
 }
 
 .FieldContainer {

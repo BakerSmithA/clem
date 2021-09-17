@@ -19,15 +19,17 @@ export class MockChatbot implements Chatbot {
     const addMessage = (m: ChatMessage, loading: boolean) => {
       this.messages = [
         ...this.messages.filter((c) => c.text !== undefined),
-        m,
+        m
       ];
       onMessage(this.messages);
     }
 
     addMessage({ text: prompt, fromUser: true }, false);
-    addMessage({ fromUser: false }, true);
+    setTimeout(() => {
+      addMessage({ fromUser: false }, true);
+    }, 400);
     setTimeout(() => {
       addMessage({ text: 'Response', fromUser: false }, false);
-    }, 1000)
+    }, 1400)
   }
 }

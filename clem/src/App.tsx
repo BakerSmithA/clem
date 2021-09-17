@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { ChatMessage, Chatbot } from './Chatbot';
+import ReactLoading from 'react-loading';
 
 interface AppProps {
   chatbot: Chatbot
@@ -40,7 +41,19 @@ function Messages({messages}: MessagesProps) {
 function Message({text, fromUser}: ChatMessage) {
   return (
     <div className={`Message ${fromUser ? 'UserMessage' : 'RespondentMessage'}`}>
-      {text}
+      {
+        text !== undefined
+          ? text 
+          : <LoadingMessage/>
+      }
+    </div>
+  );
+}
+
+function LoadingMessage() {
+  return (
+    <div className='LoadingMessage'>
+      <ReactLoading type={'bubbles'} color={'black'} height={'25px'} width={'25px'} />
     </div>
   );
 }
@@ -56,7 +69,10 @@ function Field({onSubmit}: FieldProps) {
       <input type="text" ref={textInput} className='TextField'/>
       <div 
         className='SendButton' 
-        onClick={() => onSubmit(textInput.current!.value)}
+        onClick={() => {
+          onSubmit(textInput.current!.value);
+          textInput.current!.value = '';
+        }}
       />
     </div>
   );
