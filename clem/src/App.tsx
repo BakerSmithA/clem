@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import { ChatMessage, Chatbot } from './Chatbot';
 import ReactLoading from 'react-loading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 interface AppProps {
   chatbot: Chatbot
@@ -97,8 +99,9 @@ function Field({onSubmit}: FieldProps) {
         onClick={() => {
           onSubmit(ref.current!.value);
           ref.current!.value = '';
-        }}
-      />
+        }}>
+        <FontAwesomeIcon icon={faArrowRight} />
+      </div>
     </div>
   );
 }
