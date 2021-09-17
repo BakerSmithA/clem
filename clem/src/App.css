@@ -5,6 +5,7 @@
   border: 0;
   font: 'Poppins', sans-serif;
   font-size: 14pt;
+  color: #494949;
 }
 
 textarea:focus, input:focus{
@@ -16,8 +17,29 @@ textarea:focus, input:focus{
   height: 100vh;
 }
 
+.TitleContainer {
+  background-color: #5BFFD8;
+  height: 66px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Title {
+  font-weight: 900;
+  font-size: 18pt;
+}
+
+.Subtitle {
+  padding: 4px;
+  font-size: 10pt;
+}
+
 .Messages {
-  height: calc(100% - 60px);
+  height: calc(100% - 76px - 66px);
   display: flex;
   flex-direction: column;
   padding: 24px 12px 12px 12px;
@@ -28,11 +50,12 @@ textarea:focus, input:focus{
 .Message {
   display: flex;
   align-items: center;
-  padding: 12px 25px 12px 25px;
+  padding: 12px 30px 12px 30px;
   min-height: 50px;
-  border-radius: 25px;
+  border-radius: 30px;
   box-sizing: border-box;
   width: max-content;
+  margin-bottom: 4px;
 }
 
 .LoadingMessage {
@@ -41,12 +64,13 @@ textarea:focus, input:focus{
 }
 
 .UserMessage {
-  background-color: orange;
+  background-color: #5B93FF;
   align-self: flex-end;
+  color: white;
 }
 
 .RespondentMessage {
-  background-color: lightblue;
+  background-color: #5BFFD8;
 }
 
 .FieldContainer {
@@ -54,18 +78,22 @@ textarea:focus, input:focus{
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 60px;
-  background-color: purple;
+  height: 76px;
+  background-color: #5BFFD8;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 .FieldForm {
-  background-color: orange;
-  border-radius: 25px;
+  border-radius: 30px;
   width: calc(100% - 12px);
-  height: 50px;
+  height: 60px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  padding-right: 8px;
   box-sizing: border-box;
+  background-color: white;
 }
 
 .TextField {
@@ -73,7 +101,7 @@ textarea:focus, input:focus{
   height: 100%;
   width: calc(100% - 50px);
   background-color: transparent;
-  padding-left: 25px;
+  padding-left: 30px;
   padding-right: 12px;
   box-sizing: border-box;
 }
@@ -85,4 +113,5 @@ textarea:focus, input:focus{
   border-radius: 50%;
   background-color: white;
   box-sizing: border-box;
+  background-color: #5BFFD8;
 }

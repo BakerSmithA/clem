@@ -1,4 +1,4 @@
-import React, { LegacyRef, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { ChatMessage, Chatbot } from './Chatbot';
 import ReactLoading from 'react-loading';
@@ -11,6 +11,7 @@ function App({chatbot}: AppProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   return (
     <div className='App'>
+      <Title/>
       <Messages 
         messages={messages}
       />
@@ -24,6 +25,19 @@ function App({chatbot}: AppProps) {
         />
       </div>
       <div className='Spacer'/>
+    </div>
+  );
+}
+
+function Title() {
+  return (
+    <div className='TitleContainer'>
+      <div className='Title'>
+        Clem 😊
+      </div>
+      <div className='Subtitle'>
+        Climate Chatbot
+      </div>
     </div>
   );
 }
