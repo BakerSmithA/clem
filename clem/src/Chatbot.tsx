@@ -83,13 +83,8 @@ export class Gpt3Chatbot implements Chatbot {
   private delayed = new Delayed(new History());
 
   initialMessage(onMessage: (history: ChatMessage[]) => void) {
-    onMessage([
-      ...this.delayed.history.messages, 
-      {
-        text: 'Hi, I\'m Clem, how can I help?', 
-        fromUser: false
-      }
-    ]);
+    const addMessage = this.delayed.messageCallback(onMessage);
+    addMessage({text: 'Hi, I\'m Clem, how can I help?', fromUser: false}, {delayMs: 500});
   }
 
   async respond(prompt: string, onMessage: (history: ChatMessage[]) => void) {
@@ -107,6 +102,7 @@ export class Gpt3Chatbot implements Chatbot {
     const key = await this.openAiKey();
     const header = await this.promptHeader();
     const fullPrompt = `${header}\n${prompt}`;
+    console.log(fullPrompt);
     const resp = await fetch(this.url, {
       method: 'POST',
       headers: { 
