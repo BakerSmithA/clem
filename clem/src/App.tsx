@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import { ChatMessage, Chatbot } from './Chatbot';
 import ReactLoading from 'react-loading';
@@ -9,26 +9,42 @@ interface AppProps {
   chatbot: Chatbot
 }
 
-function App({chatbot}: AppProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  return (
-    <div className='App'>
-      <Title/>
-      <Messages 
-        messages={messages}
-      />
-      <div className='FieldContainer'>
-        <Field
-          onSubmit={(t) => 
-            chatbot.respond(t, (hist) => {
-              setMessages(hist);
-            })
-          }
+interface AppState {
+  messages: ChatMessage[]
+}
+
+class App extends React.Component<AppProps, AppState> {
+  constructor(props: AppProps) {
+    super(props);
+    this.state = { messages: [] };
+  }
+
+  componentDidMount() {
+    this.props.chatbot.initialMessage((hist) => {
+      this.setState({messages: hist})
+    });
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <Title/>
+        <Messages 
+          messages={this.state.messages}
         />
+        <div className='FieldContainer'>
+          <Field
+            onSubmit={(t) => 
+              this.props.chatbot.respond(t, (hist) => {
+                this.setState({messages: hist})
+              })
+            }
+          />
+        </div>
+        <div className='Spacer'/>
       </div>
-      <div className='Spacer'/>
-    </div>
-  );
+    );
+  }
 }
 
 function Title() {
