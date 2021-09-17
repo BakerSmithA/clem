@@ -53,13 +53,13 @@ textarea:focus, input:focus{
 
 .Message {
   display: flex;
-  align-items: center;
   padding: 12px 30px 12px 30px;
-  min-height: 50px;
   border-radius: 30px;
   box-sizing: border-box;
   width: max-content;
+  max-width: 70vw;
   margin-bottom: 4px;
+  word-break: break-all;
 }
 
 .LoadingMessage {
