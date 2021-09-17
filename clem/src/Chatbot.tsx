@@ -93,7 +93,8 @@ export class Gpt3Chatbot implements Chatbot {
     const hs = this.delayed.history.messages;
 
     await addMessage({ fromUser: false }, { delayMs: 400 });
-    const resp = await this.gpt3(hs);
+    // Remove initial message
+    const resp = await this.gpt3(hs.slice(1));
     await addMessage({ text: resp, fromUser: false });
   }
 
@@ -119,7 +120,7 @@ export class Gpt3Chatbot implements Chatbot {
     const json = await resp.json();
     const text: string = json['choices'][0]['text'];
     const splits = text.split('---');
-    return splits[splits.length-1].replace('Clem:', '');
+    return splits[splits.length-1].replace('Clem:', '').replace('AI:', '');
   }
 
   private async openAiKey(): Promise<string> {

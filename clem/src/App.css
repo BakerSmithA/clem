@@ -73,6 +73,7 @@ textarea:focus, input:focus{
   background-color: #5B93FF;
   align-self: flex-end;
   color: white;
+  text-align: right;
 }
 
 .RespondentMessage {
