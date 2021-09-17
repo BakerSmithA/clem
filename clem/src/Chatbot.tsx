@@ -1,4 +1,5 @@
 import key from './key.txt';
+import promptHeader from './promptHeader.txt';
 
 export interface ChatMessage {
   /** If undefined, message is loading */
@@ -82,8 +83,13 @@ export class Gpt3Chatbot implements Chatbot {
   private delayed = new Delayed(new History());
 
   initialMessage(onMessage: (history: ChatMessage[]) => void) {
-    const addMessage = this.delayed.messageCallback(onMessage);
-    addMessage({text: 'Hi, I\'m Clem, how can I help?', fromUser: false}, {delayMs: 500});
+    onMessage([
+      ...this.delayed.history.messages, 
+      {
+        text: 'Hi, I\'m Clem, how can I help?', 
+        fromUser: false
+      }
+    ]);
   }
 
   async respond(prompt: string, onMessage: (history: ChatMessage[]) => void) {
@@ -99,6 +105,8 @@ export class Gpt3Chatbot implements Chatbot {
   private async gpt3(hs: ChatMessage[]): Promise<string> {
     const prompt = this.formattedHistory(hs);
     const key = await this.openAiKey();
+    const header = await this.promptHeader();
+    const fullPrompt = `${header}\n${prompt}`;
     const resp = await fetch(this.url, {
       method: 'POST',
       headers: { 
@@ -106,7 +114,7 @@ export class Gpt3Chatbot implements Chatbot {
         'Authorization': `Bearer ${key}`,
       },
       body: JSON.stringify({ 
-        prompt: prompt,
+        prompt: fullPrompt,
         max_tokens: 128,
         temperature: 0.8,
         stop: '---',
@@ -115,7 +123,7 @@ export class Gpt3Chatbot implements Chatbot {
     const json = await resp.json();
     const text: string = json['choices'][0]['text'];
     const splits = text.split('---');
-    return splits[splits.length-1];
+    return splits[splits.length-1].replace('Clem:', '');
   }
 
   private async openAiKey(): Promise<string> {
@@ -123,8 +131,9 @@ export class Gpt3Chatbot implements Chatbot {
     return r.text();
   }
 
-  private promptHeader(): string {
-    return '';
+  private async promptHeader(): Promise<string> {
+    const r = await fetch(promptHeader);
+    return r.text();
   }
 
   private formattedHistory(messages: ChatMessage[]): string {

@@ -61,7 +61,7 @@ textarea:focus, input:focus{
   min-height: 50px;
   max-width: 70vw;
   margin-bottom: 4px;
-  word-break: break-all;
+  word-break: normal;
 }
 
 .LoadingMessage {
