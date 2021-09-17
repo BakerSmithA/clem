@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { LegacyRef, useState } from 'react';
 import './App.css';
 import { ChatMessage, Chatbot } from './Chatbot';
 import ReactLoading from 'react-loading';
@@ -17,7 +17,9 @@ function App({chatbot}: AppProps) {
       <div className='FieldContainer'>
         <Field
           onSubmit={(t) => 
-            chatbot.respond(t, (hist) => setMessages(hist))
+            chatbot.respond(t, (hist) => {
+              setMessages(hist);
+            })
           }
         />
       </div>
@@ -30,12 +32,21 @@ interface MessagesProps {
   messages: ChatMessage[]
 }
 
-function Messages({messages}: MessagesProps) {
-  return (
-    <div className='Messages'>
-      {messages.map((m) => <Message key={m.text} text={m.text} fromUser={m.fromUser} />)}
-    </div>
-  );
+class Messages extends React.Component<MessagesProps, {}> {
+  private ref = React.createRef<HTMLDivElement>();
+
+  componentDidUpdate() {
+    this.ref.current?.scrollIntoView();
+  }
+
+  render() {
+    return (
+      <div className='Messages'>
+        {this.props.messages.map((m) => <Message key={m.text} text={m.text} fromUser={m.fromUser} />)}
+        <div ref={this.ref}/>
+      </div>
+    );
+  }
 }
 
 function Message({text, fromUser}: ChatMessage) {
@@ -63,15 +74,15 @@ interface FieldProps {
 }
 
 function Field({onSubmit}: FieldProps) {
-  const textInput = React.createRef<HTMLInputElement>();
+  const ref = React.createRef<HTMLInputElement>();
   return (
     <div className='FieldForm'>
-      <input type="text" ref={textInput} className='TextField'/>
+      <input type="text" ref={ref} className='TextField'/>
       <div 
         className='SendButton' 
         onClick={() => {
-          onSubmit(textInput.current!.value);
-          textInput.current!.value = '';
+          onSubmit(ref.current!.value);
+          ref.current!.value = '';
         }}
       />
     </div>
