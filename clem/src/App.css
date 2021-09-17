@@ -47,6 +47,10 @@ textarea:focus, input:focus{
   overflow-y: scroll;
 }
 
+.Messages::-webkit-scrollbar {
+  display: none;
+}
+
 .Message {
   display: flex;
   align-items: center;

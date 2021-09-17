@@ -35,7 +35,7 @@ function Title() {
   return (
     <div className='TitleContainer'>
       <div className='Title'>
-        Clem 😊
+        Clem 🌍
       </div>
       <div className='Subtitle'>
         Climate Chatbot
@@ -52,7 +52,7 @@ class Messages extends React.Component<MessagesProps, {}> {
   private ref = React.createRef<HTMLDivElement>();
 
   componentDidUpdate() {
-    this.ref.current?.scrollIntoView();
+    this.ref.current?.scrollIntoView({behavior: 'smooth'});
   }
 
   render() {
