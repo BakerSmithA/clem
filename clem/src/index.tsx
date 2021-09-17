@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { MockChatbot } from './Chatbot';
+import { Gpt3Chatbot } from './Chatbot';
 
-const chatbot = new MockChatbot();
+const chatbot = new Gpt3Chatbot();
 
 ReactDOM.render(
   <React.StrictMode>
