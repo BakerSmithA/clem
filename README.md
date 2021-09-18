@@ -1,2 +1,2 @@
-# clem
-Climate Crisis chatbot.
+# Clem
+Chatbot that answers climate-crisis questions. 
