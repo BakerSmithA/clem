@@ -4,7 +4,7 @@
   margin: 0;
   border: 0;
   font: 'Poppins', sans-serif;
-  font-size: 14pt;
+  font-size: 12pt;
   color: #494949;
 }
 
@@ -45,6 +45,7 @@ textarea:focus, input:focus{
   padding: 24px 12px 12px 12px;
   box-sizing: border-box;
   overflow-y: scroll;
+  font-weight: 600;
 }
 
 .Messages::-webkit-scrollbar {
@@ -58,8 +59,7 @@ textarea:focus, input:focus{
   border-radius: 30px;
   box-sizing: border-box;
   width: max-content;
-  min-height: 50px;
-  max-width: 70vw;
+  max-width: 80vw;
   margin-bottom: 4px;
   word-break: normal;
 }
@@ -73,7 +73,6 @@ textarea:focus, input:focus{
   background-color: #5B93FF;
   align-self: flex-end;
   color: white;
-  text-align: right;
 }
 
 .RespondentMessage {

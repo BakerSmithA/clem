@@ -96,7 +96,7 @@ function Message({text, fromUser}: ChatMessage) {
 function LoadingMessage() {
   return (
     <div className='LoadingMessage'>
-      <ReactLoading type={'bubbles'} color={'black'} height={'25px'} width={'25px'} />
+      <ReactLoading type={'bubbles'} color={'black'} height={'18px'} width={'25px'} />
     </div>
   );
 }

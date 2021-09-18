@@ -113,7 +113,7 @@ export class Gpt3Chatbot implements Chatbot {
       body: JSON.stringify({ 
         prompt: fullPrompt,
         max_tokens: 128,
-        temperature: 0.8,
+        temperature: 0.7,
         stop: '---',
       })
     });
