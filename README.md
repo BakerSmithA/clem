@@ -1,5 +1,5 @@
-# clem
-Climate Crisis chatbot built with GPT-3 and React. Here's a few example conversations:
+# Clem
+Climate crisis chatbot built with GPT-3 and React. Here's a few example conversations:
 
 ### Unusual energy
 <img src='examples/01.png' height='400px'>
